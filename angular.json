@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "angular-table"
+  "defaultProject": "angular-table",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
