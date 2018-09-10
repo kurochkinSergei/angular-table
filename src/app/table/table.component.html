@@ -1,0 +1,23 @@
+<div *ngIf="loading">loading...</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Имя</th>
+      <th>Возраст</th>
+      <th>Пол</th>
+      <th>Департамент</th>
+      <th>Адрес</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- TODO as separate component -->
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td> 
+      <td>{{ user.age }}</td> 
+      <td>{{ user.gender }}</td> 
+      <td>{{ user.department }}</td> 
+      <td>{{ user.address | json }}</td> 
+    </tr>
+  </tbody>
+</table>
