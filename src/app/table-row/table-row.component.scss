@@ -1,3 +1,59 @@
+@import '~src/assets/scss/colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Jura|Roboto');
+
 :host {
-    display: table-row;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    transition: all ease-in .3s;
+    // transition-delay: .5s;
+
+    &:hover {
+        cursor: pointer;
+        background: rgba($russian-green, 0.5);
+
+        & .table-cell {
+            font-weight: bold;
+        }
+    }
+}
+
+.table-cell {
+    width: 100%; 
+    color: $jet;
+    flex-grow: 1;
+    display: flex;
+    font-size: 14px;
+    overflow: hidden; 
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    padding: 0.8em 1.2em;
+    box-sizing: border-box;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    background: rgba($pistachio, 0.2);
+}
+
+:host:nth-child(2n) .table-cell {
+    background: rgba($pistachio, 0.1);
+}
+
+.table-header-cell {
+    font-size: 18px;
+    font-weight: bold;
+    color: $white-smoke;
+    background: $pistachio;
+    text-transform: uppercase;
+    font-family: 'Jura', sans-serif;
+}
+
+@media ( max-width: 900px) {
+    .table-cell {
+        font-size: 12px;
+    }
+
+    .table-header-cell {
+        font-size: 14px;
+    }
 }

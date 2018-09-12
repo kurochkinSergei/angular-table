@@ -1,20 +1,22 @@
-<div *ngIf="loading">loading...</div>
+<div class="table-wrapper">
+  <div *ngIf="loading">loading...</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Имя</th>
-      <th>Возраст</th>
-      <th>Пол</th>
-      <th>Департамент</th>
-      <th>Адрес</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- TODO as separate component -->
-      <app-table-row *ngFor="let user of users"
-        [keysToRender]="['name', 'age', 'gender', 'department', 'address']"
-        [rowData]="user">
-      </app-table-row>
-  </tbody>
-</table>
+  <div class="table">
+    <!-- 
+      table head is just the same row 
+      but with custom data and styles
+    -->
+    <app-table-row
+      class="table-header" 
+      [isHeader] = "true"
+      [keysToRender]="['name', 'age', 'gender', 'department', 'address']"
+      [rowData]="{name: 'Имя', age: 'Возраст', gender: 'Пол', department: 'Департамент', address: 'Адрес'}">
+    </app-table-row>
+    
+    <app-table-row 
+      *ngFor="let user of users"
+      [keysToRender]="['name', 'age', 'gender', 'department', 'address']"
+      [rowData]="user">
+    </app-table-row>
+  </div>
+</div>

@@ -2,13 +2,22 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table-row',
-  template: '<td *ngFor="let item of items">{{ item }}</td>',
+  template: `<div class="table-cell" [ngClass]="{'table-header-cell': isHeader}" *ngFor="let item of items">
+    <h3 *ngIf="isHeader; else notHeader">
+      {{ item }}
+    </h3>
+
+    <ng-template #notHeader>
+      {{ item }}
+    </ng-template>
+  </div>`,
   styleUrls: ['./table-row.component.scss'],
 })
 
 export class TableRowComponent implements OnInit {
   @Input() rowData: Object;
   @Input() keysToRender: string[];
+  @Input() isHeader: boolean;
   items: string[];
 
   constructor() {

@@ -1,0 +1,31 @@
+@import '~src/assets/scss/colors.scss';
+:host {
+    width: 100%;
+    margin: 40px;
+}
+
+.table {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    min-width: 600px;
+    margin: 0 0 3em 0;
+    flex-direction: column;
+  }
+
+.table-header {
+    border-bottom: 5px solid $russian-green;
+}
+
+.table-wrapper {
+    overflow: scroll;
+    width: calc(100% - 80px);
+}
+
+@media ( min-width: 900px) {
+    .table {
+        margin: auto;
+        max-width: 1200px;  
+    }
+}

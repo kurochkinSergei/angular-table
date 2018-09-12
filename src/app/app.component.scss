@@ -1,7 +1,14 @@
-@import '../assets/scss/reset.scss';
-
-$pinky: pink;
-
-p {
-    color: $pinky;
+@import '~src/assets/scss/colors.scss';
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color:  rgba($white-smoke, 0.5);
+    // background:
+    // radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, rgba($old-silver,0.2) 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
+    // radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, rgba($old-silver,0.2) 10px, rgba(96, 16, 48, 0) 11px), rgba($white-smoke, 0.5);
+    // background-size: 20px 20px;
+    overflow-x: hidden;
 }
