@@ -1,7 +1,11 @@
 <div class="table-wrapper">
   <div *ngIf="loading">loading...</div>
   
-  <app-table-filter></app-table-filter>
+  <app-table-filter
+    [filters]="filters"
+    [allowedValues] = "appliedFilters"
+    (appliedFilters)="filterTable($event)"
+  ></app-table-filter>
   
   <div class="table">
     <app-table-row
@@ -11,14 +15,12 @@
       [rowData]="headerData"
       (sortKey)="sortTable($event)"
       (loading)="loading = $event"
-    >
-    </app-table-row>
+    ></app-table-row>
     
     <app-table-row 
-      *ngFor="let user of bodyData"
+      *ngFor="let user of shownRows"
       [keysToRender]="keysToRender"
       [rowData]="user"
-    >
-    </app-table-row>
+    ></app-table-row>
   </div>
 </div>

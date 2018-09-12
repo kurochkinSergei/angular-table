@@ -4,10 +4,15 @@
   <div class="filter__label">
     {{ filter.label }}  
   </div>
-  
+  <h1>{{ filter[$name] }}</h1>
   <div class="filter-entry" *ngFor="let entry of filter.entries">
       <label class="filter-checkbox">
-          <input type="checkbox" />
+          <input type="checkbox" 
+                 name="{{ entry.value }}"
+                 attr.data-filter-name="{{ filter.name }}"
+                 (click)="filterTable($event)"
+                 checked="{{ allowedValues | contains: filter.name }}"
+          />
           <div class="filter-checkbox__text">{{ entry.value }} 
             <span class="filter-entry__count">({{ entry.count }})</span>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table-filter',
@@ -6,58 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-filter.component.scss'],
 })
 export class TableFilterComponent implements OnInit {
-  filters: Object[];
-
+  inputs: NodeListOf<HTMLInputElement>;
+  @Input() filters: Object[];
+  @Input() allowedValues: string[];
+  @Output() appliedFilters: EventEmitter<Object> = new EventEmitter<Object>();
   constructor() {
-    this.filters = [
-      {
-        label: 'Пол',
-        entries: [{
-          value:'male',
-          count: 4,
-        },
-        {
-          value:'female',
-          count: 3,
-        },
-        ],
-      },
-      {
-        label: 'Департамент',
-        entries: [{
-          value:'Пупа',
-          count: 4,
-        },
-        {
-          value:'Лупа',
-          count: 3,
-        },
-        {
-          value:'Лупа',
-          count: 3,
-        },
-        ],
-      },
-      {
-        label: 'Город',
-        entries: [{
-          value:'Зажопинск',
-          count: 4,
-        },
-        {
-          value:'Залупинск',
-          count: 2,
-        },
-        {
-          value:'Хуйпоймигдеиво',
-          count: 1,
-        },
-        ],
-      },
-    ];
+    this.inputs = document.getElementsByTagName('input');
+  }
+
+  filterTable() :void {
+    const newAppFilters = {};
+
+    for (let i = 0; i < this.inputs.length; i = i + 1) {
+      const input = this.inputs[i];
+      if (input.checked) {
+        const filterName = input.getAttribute('data-filter-name');
+        // really proud of it
+        newAppFilters[filterName] = [... newAppFilters[filterName] || [], input.name];
+      }
+    }
+
+    this.appliedFilters.emit(newAppFilters);
   }
 
   ngOnInit() {
   }
-
 }
