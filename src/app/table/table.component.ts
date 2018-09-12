@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,11 +8,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TableComponent implements OnInit {
   users: any;
+  shownRows: any;
   loading: boolean;
   usersURL: string;
+  @Input() keysToRender: string[];
 
   constructor(private http: HttpClient) {
-    this.users = [];
+    this.shownRows = [];
+    // this.keysToRender = [];
     this.usersURL = 'https://gist.githubusercontent.com/bunopus/f48fbb06578003fb521c7c1a54fd906a/raw/e5767c1e7f172c6375f064a9441f2edd57a79f15/test_users.json';
   }
 
@@ -21,6 +24,8 @@ export class TableComponent implements OnInit {
     this.http.get(this.usersURL)
       .subscribe((data) => {
         // TODO fail check
+
+        // create list of unique keys of all objects and return it
         this.users = data;
         this.loading = false;
       });

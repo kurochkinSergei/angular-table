@@ -12,12 +12,9 @@
   </thead>
   <tbody>
     <!-- TODO as separate component -->
-    <tr *ngFor="let user of users">
-      <td>{{ user.name }}</td> 
-      <td>{{ user.age }}</td> 
-      <td>{{ user.gender }}</td> 
-      <td>{{ user.department }}</td> 
-      <td>{{ user.address | json }}</td> 
-    </tr>
+      <app-table-row *ngFor="let user of users"
+        [keysToRender]="['name', 'age', 'gender', 'department', 'address']"
+        [rowData]="user">
+      </app-table-row>
   </tbody>
 </table>
