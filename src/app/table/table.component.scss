@@ -14,10 +14,6 @@
     flex-direction: column;
   }
 
-.table-header {
-    border-bottom: 5px solid $russian-green;
-}
-
 .table-wrapper {
     overflow: scroll;
     width: calc(100% - 80px);

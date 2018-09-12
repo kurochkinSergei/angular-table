@@ -1,51 +1,44 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table-row',
-  template: `<div class="table-cell" [ngClass]="{'table-header-cell': isHeader}" *ngFor="let item of items">
-    <h3 *ngIf="isHeader; else notHeader">
-      {{ item }}
-    </h3>
-
-    <ng-template #notHeader>
-      {{ item }}
-    </ng-template>
-  </div>`,
+  templateUrl: './table-row.component.html',
   styleUrls: ['./table-row.component.scss'],
 })
 
 export class TableRowComponent implements OnInit {
+  items: Object[];
   @Input() rowData: Object;
   @Input() keysToRender: string[];
   @Input() isHeader: boolean;
-  items: string[];
 
-  constructor() {
-    // this.dataToRender = this.keysToRender.reduce((acc, cur, i, arr) => {
-    //   acc[arr[i]] = this.rowData[cur];
-    //   return acc;
-      // if (this.rowData.hasOwnProperty(key)) {
+  @Output() loading: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() sortKey: EventEmitter<string> = new EventEmitter<string>();
 
-      // } else {
-      //   return
-      // }
-      // (typeof !this.rowData === 'object' || Array.isArray(props[propName]))
+  constructor() {}
 
-    // },{});
+  filterTable($event) {
+    this.sortKey.emit($event.currentTarget.getAttribute('data-key'));
+    // this.loading.emit(true);
   }
 
   ngOnInit() {
-    // transform rowData object to an ordered array of items
+    // transform rowData object to an ordered array of objects
     // order depends on keysToRender array
     this.items = this.keysToRender.map((key) => {
+      const item = {
+        key,
+        value: ''};
       if (!this.rowData.hasOwnProperty(key)) {
-        return ' - ';
+        item.value = ' - ';
+        return item;
       }
 
       // check if item is not object i.e. address
       if (!(typeof this.rowData[key] === 'object')
         || Array.isArray(this.rowData[key])) {
-        return this.rowData[key];
+        item.value = this.rowData[key];
+        return item;
       }
 
       // otherwise item is object
@@ -56,7 +49,8 @@ export class TableRowComponent implements OnInit {
           itemValue = `${itemValue}${this.rowData[key][property]}, `;
         }
       }
-      return itemValue.slice(0, -2);
+      item.value = itemValue.slice(0, -2);
+      return item;
     });
   }
 }

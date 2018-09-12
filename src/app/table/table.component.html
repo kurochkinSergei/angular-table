@@ -1,22 +1,24 @@
 <div class="table-wrapper">
   <div *ngIf="loading">loading...</div>
-
+  
+  <app-table-filter></app-table-filter>
+  
   <div class="table">
-    <!-- 
-      table head is just the same row 
-      but with custom data and styles
-    -->
     <app-table-row
       class="table-header" 
       [isHeader] = "true"
-      [keysToRender]="['name', 'age', 'gender', 'department', 'address']"
-      [rowData]="{name: 'Имя', age: 'Возраст', gender: 'Пол', department: 'Департамент', address: 'Адрес'}">
+      [keysToRender]="keysToRender"
+      [rowData]="headerData"
+      (sortKey)="sortTable($event)"
+      (loading)="loading = $event"
+    >
     </app-table-row>
     
     <app-table-row 
-      *ngFor="let user of users"
-      [keysToRender]="['name', 'age', 'gender', 'department', 'address']"
-      [rowData]="user">
+      *ngFor="let user of bodyData"
+      [keysToRender]="keysToRender"
+      [rowData]="user"
+    >
     </app-table-row>
   </div>
 </div>

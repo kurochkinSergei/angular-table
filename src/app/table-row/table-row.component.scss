@@ -9,7 +9,6 @@
     // transition-delay: .5s;
 
     &:hover {
-        cursor: pointer;
         background: rgba($russian-green, 0.5);
 
         & .table-cell {
@@ -21,6 +20,7 @@
 .table-cell {
     width: 100%; 
     color: $jet;
+    height: 60px;
     flex-grow: 1;
     display: flex;
     font-size: 14px;
@@ -46,9 +46,17 @@
     background: $pistachio;
     text-transform: uppercase;
     font-family: 'Jura', sans-serif;
+    transition: all ease-in .3s;
+    border-bottom: 5px solid $russian-green;
+
+    &:hover {
+        cursor: pointer;
+        background: $bordo;
+        border-bottom: 5px solid darken($bordo, 10%);
+    }
 }
 
-@media ( max-width: 900px) {
+@media ( max-width: 899px) {
     .table-cell {
         font-size: 12px;
     }

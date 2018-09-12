@@ -1,0 +1,14 @@
+<div *ngFor="let item of items"
+    class="table-cell"
+    attr.data-key="{{ item.key }}"
+    [ngClass]="{'table-header-cell': isHeader}" 
+    (click)="filterTable($event)"
+>
+    <h3 *ngIf="isHeader; else notHeader">
+        {{ item.value }}
+    </h3>
+
+    <ng-template #notHeader>
+        {{ item.value }}
+    </ng-template>
+</div>

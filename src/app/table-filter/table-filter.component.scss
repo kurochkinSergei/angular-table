@@ -1,0 +1,100 @@
+@import '~src/assets/scss/colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Jura|Roboto');
+
+:host {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    // background: url('../../assets/img/filter.svg');
+    // background-size: 40px 40px;
+    // background-repeat: repeat space;
+
+}
+
+.filter {
+    font-family: 'Roboto', sans-serif;
+    color: $jet;
+    margin: 10px 20px;
+
+    &-entry {
+        padding: 10px;
+        min-width: 180px;
+
+        &__count {
+            color: $old-silver;
+        }
+    }
+
+    &__label {
+        margin: 10px;
+        font-family:  'Jura', sans-serif;
+        font-size: 18px;
+        color: $russian-green;
+        text-align: center;
+    }
+    &-checkbox {
+        & input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            margin: 10px 0 0 20px;
+
+            &:checked {
+                & + .filter-checkbox__text:before {
+                    background: $pistachio;
+                }
+                & + .filter-checkbox__text:after {
+                left: 22px;
+                }
+            }
+         }
+        &__text {
+            position: relative;
+            padding: 0 0 0 60px;
+            cursor: pointer;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: -4px;
+                left: 0;
+                width: 40px;
+                height: 20px;
+                border-radius: 10px;
+                background: darken($white-smoke, 20%);
+                box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+                transition: .2s;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: 2px;
+                width: 16px;
+                height: 16px;
+                border-radius: 8px;
+                background: white;
+                box-shadow: 0 2px 5px rgba(0,0,0,.3);
+                transition: .2s;
+            }
+        }
+    }
+}
+
+@media ( max-width: 899px) {
+    :host {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-entry {
+        display: flex;
+    }
+    
+    .filter:last-child {
+        display: none;
+    }
+
+}

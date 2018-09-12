@@ -1,0 +1,16 @@
+<div *ngFor="let filter of filters"
+     class="filter"
+>
+  <div class="filter__label">
+    {{ filter.label }}  
+  </div>
+  
+  <div class="filter-entry" *ngFor="let entry of filter.entries">
+      <label class="filter-checkbox">
+          <input type="checkbox" />
+          <div class="filter-checkbox__text">{{ entry.value }} 
+            <span class="filter-entry__count">({{ entry.count }})</span>
+          </div>
+      </label> 
+  </div>
+</div>
