@@ -13,12 +13,14 @@ export class TableComponent implements OnInit {
   shownRows: any;
   sortStatus: Object;
   loading: boolean;
+  error: boolean;
   bodyDataURL: string;
   keysToRender: string[];
   filters: Object[];
   appliedFilters: Object;
 
   constructor(private http: HttpClient) {
+    this.error = false;
     this.keysToRender = ['name', 'age', 'gender', 'department', 'address'];
     this.headerData = { name: 'Имя', age: 'Возраст', gender: 'Пол', department: 'Департамент', address: 'Адрес' };
     this.appliedFilters = { gender: [], department: [], address: [] };
@@ -39,9 +41,8 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.http.get(this.bodyDataURL).subscribe((data) => {
-      // TODO fail check
 
+    this.http.get(this.bodyDataURL).subscribe((data) => {
       // create list of unique keys of all objects and return it
       this.bodyData = data;
       this.shownRows = data;
@@ -49,6 +50,10 @@ export class TableComponent implements OnInit {
 
       // generate filters according to data
       this.filters = this.setFilters(data, this.filters);
+    },
+    (error) => {
+      this.loading = false;
+      this.error = true;
     });
 
     // assign sort status for each column to 0

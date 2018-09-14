@@ -5,6 +5,7 @@ import { TableComponent } from './table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TableRowComponent } from './table-row/table-row.component';
 import { TableFilterComponent } from './table-filter/table-filter.component';
+import { TableLoaderComponent } from './table-loader/table-loader.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { TableFilterComponent } from './table-filter/table-filter.component';
     TableComponent,
     TableRowComponent,
     TableFilterComponent,
+    TableLoaderComponent,
   ],
   imports: [
     BrowserModule,

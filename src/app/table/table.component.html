@@ -1,26 +1,39 @@
 <div class="table-wrapper">
-  <div *ngIf="loading">loading...</div>
-  
-  <app-table-filter
-    [filters]="filters"
-    [prevAppliedFilters] = "appliedFilters"
-    (appliedFilters)="filterTable($event)"
-  ></app-table-filter>
-  
-  <div class="table">
-    <app-table-row
-      class="table-header" 
-      [isHeader] = "true"
-      [keysToRender]="keysToRender"
-      [rowData]="headerData"
-      (sortKey)="sortTable($event)"
-      (loading)="loading = $event"
-    ></app-table-row>
-    
-    <app-table-row 
-      *ngFor="let user of shownRows"
-      [keysToRender]="keysToRender"
-      [rowData]="user"
-    ></app-table-row>
+  <div *ngIf="loading || error; else ready">
+    <app-table-loader *ngIf="loading">
+
+    </app-table-loader>
+
+    <div class="table-error" *ngIf="error">
+        Something went terribly wrong...
+      </div>
   </div>
+
+  
+  
+  <ng-template #ready>
+    <app-table-filter 
+      [filters]="filters"
+      [prevAppliedFilters] = "appliedFilters"
+      (appliedFilters)="filterTable($event)"
+    ></app-table-filter>
+    
+    <div class="table">
+      <app-table-row
+        class="table-header" 
+        [isHeader] = "true"
+        [keysToRender]="keysToRender"
+        [rowData]="headerData"
+        (sortKey)="sortTable($event)"
+        (loading)="loading = $event"
+      ></app-table-row>
+      
+      <app-table-row 
+        *ngFor="let user of shownRows"
+        [keysToRender]="keysToRender"
+        [rowData]="user"
+      ></app-table-row>
+    </div>
+
+</ng-template>
 </div>
