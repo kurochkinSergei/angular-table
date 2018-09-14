@@ -11,7 +11,7 @@
                  name="{{ entry.value }}"
                  attr.data-filter-name="{{ filter.name }}"
                  (click)="filterTable($event)"
-                 checked="{{ allowedValues | contains: filter.name }}"
+                 checked="{{ entry.checked }}"
           />
           <div class="filter-checkbox__text">{{ entry.value }} 
             <span class="filter-entry__count">({{ entry.count }})</span>

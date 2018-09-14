@@ -17,10 +17,8 @@ export class TableComponent implements OnInit {
   keysToRender: string[];
   filters: Object[];
   appliedFilters: Object;
-  allowedValues: string[];
 
   constructor(private http: HttpClient) {
-    this.allowedValues = ['Hr'];
     this.keysToRender = ['name', 'age', 'gender', 'department', 'address'];
     this.headerData = { name: 'Имя', age: 'Возраст', gender: 'Пол', department: 'Департамент', address: 'Адрес' };
     this.appliedFilters = { gender: [], department: [], address: [] };
@@ -90,17 +88,27 @@ export class TableComponent implements OnInit {
           entries.push({ value: property, count: entriesObj[property] });
         }
       }
+
+      // vodoo working to make checkboxes save their state
+      if (this.appliedFilters.hasOwnProperty(filter.name)) {
+        const selectedInputs = this.appliedFilters[filter.name];
+        selectedInputs.forEach((input) => {
+          entries.forEach((entry) => {
+            if (input === entry.value) {
+              entry['checked'] = 'checked';
+            }
+          });
+        });
+      }
       return { ...filter, entries };
     });
-
-    // console.log(newFilters);
 
     return newFilters;
   }
 
   filterTable(appliedFilters: Object) {
     let filteredData = this.bodyData;
-    this.allowedValues = [];
+    this.appliedFilters = appliedFilters;
 
     for (const property in appliedFilters) {
       if (appliedFilters.hasOwnProperty(property)) {

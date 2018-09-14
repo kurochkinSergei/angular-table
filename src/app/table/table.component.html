@@ -3,7 +3,7 @@
   
   <app-table-filter
     [filters]="filters"
-    [allowedValues] = "appliedFilters"
+    [prevAppliedFilters] = "appliedFilters"
     (appliedFilters)="filterTable($event)"
   ></app-table-filter>
   

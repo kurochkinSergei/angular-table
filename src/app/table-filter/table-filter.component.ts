@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-table-filter',
@@ -6,12 +6,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./table-filter.component.scss'],
 })
 export class TableFilterComponent implements OnInit {
+  filtersState: Object;
   inputs: NodeListOf<HTMLInputElement>;
   @Input() filters: Object[];
-  @Input() allowedValues: string[];
+  @Input() prevAppliedFilters: Object;
   @Output() appliedFilters: EventEmitter<Object> = new EventEmitter<Object>();
   constructor() {
     this.inputs = document.getElementsByTagName('input');
+    this.filtersState = {
+    } ;
   }
 
   filterTable() :void {
@@ -26,6 +29,7 @@ export class TableFilterComponent implements OnInit {
       }
     }
 
+    this.filtersState = newAppFilters;
     this.appliedFilters.emit(newAppFilters);
   }
 
